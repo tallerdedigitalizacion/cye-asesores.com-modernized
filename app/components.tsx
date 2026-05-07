@@ -1,8 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { assets, business, navItems } from "./data";
 
 export function Header() {
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    const normalizedPath = pathname.replace(/\/$/, "") || "/";
+    const normalizedHref = href.replace(/\/$/, "") || "/";
+    return normalizedHref === "/" ? normalizedPath === "/" : normalizedPath === normalizedHref;
+  };
+
   return (
     <header className="site-header">
       <Link className="brand" href="/" aria-label="CYE Asesores inicio">
@@ -10,14 +21,16 @@ export function Header() {
       </Link>
       <nav className="main-nav" aria-label="Navegacion principal">
         {navItems.map((item) => (
-          <Link key={item.href} href={item.href}>
+          <Link
+            key={item.href}
+            className={`${isActive(item.href) ? "is-active" : ""} ${item.href === "/contacto/" ? "contact-link" : ""}`}
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
             {item.label}
           </Link>
         ))}
       </nav>
-      <Link className="nav-cta" href="/contacto/">
-        Contacto
-      </Link>
     </header>
   );
 }
@@ -26,11 +39,30 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-top">
-        <div>
+        <div className="footer-brand">
           <Image src={assets.logo} alt="CYE Asesores" width={180} height={96} />
           <p>{business.description}</p>
         </div>
-        <ContactMini />
+        <div className="footer-contact-grid">
+          <div>
+            <strong>Direccion</strong>
+            <span>{business.addressLines[0]}</span>
+            <span>{business.addressLines[1]}</span>
+          </div>
+          <div>
+            <strong>Telefonos</strong>
+            <a href={`tel:${business.phone.replaceAll(" ", "")}`}>{business.phone}</a>
+            <a href={business.whatsappUrl}>{business.whatsapp}</a>
+          </div>
+          <div>
+            <strong>Correo</strong>
+            {business.emails.map((email) => (
+              <a key={email} href={`mailto:${email}`}>
+                {email}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
       <Image className="kit-digital" src={assets.kitDigital} alt="" width={1300} height={121} />
       <div className="footer-bottom">

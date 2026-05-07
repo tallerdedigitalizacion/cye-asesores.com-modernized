@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ContactMini, SectionIntro } from "./components";
+import { SectionIntro } from "./components";
 import { assets, business, services } from "./data";
 
 export default function Home() {
@@ -110,7 +110,9 @@ export default function Home() {
             trabajar juntos.
           </p>
         </div>
-        <ContactMini />
+        <Link className="button primary" href="/contacto/">
+          Contacto
+        </Link>
       </section>
     </>
   );

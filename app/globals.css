@@ -56,7 +56,7 @@ img {
   top: 0;
   z-index: 20;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 28px;
   padding: 14px clamp(18px, 5vw, 70px);
@@ -72,7 +72,7 @@ img {
 
 .main-nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: clamp(14px, 3vw, 38px);
   font-size: 0.86rem;
   font-weight: 700;
@@ -85,12 +85,27 @@ img {
   border-bottom: 2px solid transparent;
 }
 
-.main-nav a:hover {
+.main-nav a:hover,
+.main-nav a.is-active {
   color: var(--teal);
   border-color: var(--orange);
 }
 
-.nav-cta,
+.main-nav a.contact-link {
+  min-height: 40px;
+  padding: 8px 16px;
+  background: var(--teal);
+  color: var(--white);
+  border: 0;
+  border-radius: 4px;
+}
+
+.main-nav a.contact-link:hover,
+.main-nav a.contact-link.is-active {
+  background: var(--orange);
+  color: #121212;
+}
+
 .button,
 .contact-form button,
 .cookie-actions button {
@@ -107,7 +122,6 @@ img {
   cursor: pointer;
 }
 
-.nav-cta,
 .button.primary,
 .contact-form button,
 .cookie-actions button {
@@ -122,7 +136,6 @@ img {
 }
 
 .button:hover,
-.nav-cta:hover,
 .contact-form button:hover {
   background: var(--orange);
   color: #121212;
@@ -366,6 +379,18 @@ img {
   color: var(--white);
 }
 
+.cta-section .button {
+  justify-self: end;
+  min-width: 170px;
+  background: var(--orange);
+  color: #121212;
+}
+
+.cta-section .button:hover {
+  background: var(--white);
+  color: var(--teal-dark);
+}
+
 .page-hero {
   min-height: 54svh;
   padding: clamp(64px, 10vw, 130px) clamp(18px, 6vw, 86px);
@@ -376,6 +401,18 @@ img {
 .page-hero h1 {
   max-width: 1100px;
   font-size: clamp(2.8rem, 7vw, 6rem);
+}
+
+.page-hero .button {
+  margin-top: 30px;
+  background: var(--orange);
+  color: #121212;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+
+.page-hero .button:hover {
+  background: var(--white);
+  color: var(--teal-dark);
 }
 
 .image-backed {
@@ -496,21 +533,46 @@ img {
 
 .site-footer {
   padding: 50px clamp(18px, 6vw, 86px) 34px;
-  background: #17252f;
-  color: #dbe7e8;
+  background: var(--white);
+  color: var(--ink);
+  border-top: 1px solid var(--line);
 }
 
 .footer-top {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 34px;
+  grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.4fr);
+  gap: clamp(30px, 6vw, 76px);
+  align-items: start;
 }
 
-.site-footer img:not(.kit-digital) {
-  filter: brightness(1.14);
-  background: var(--white);
-  border-radius: 4px;
-  padding: 6px;
+.footer-brand img {
+  width: 180px;
+  height: auto;
+}
+
+.footer-brand p {
+  max-width: 360px;
+  color: var(--muted);
+}
+
+.footer-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.footer-contact-grid div {
+  display: grid;
+  gap: 4px;
+}
+
+.footer-contact-grid strong {
+  color: var(--teal);
+  font-size: 1.02rem;
+}
+
+.footer-contact-grid a {
+  color: var(--ink);
 }
 
 .kit-digital {
@@ -525,7 +587,7 @@ img {
   justify-content: space-between;
   gap: 18px;
   padding-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid var(--line);
   font-size: 0.92rem;
 }
 
@@ -635,12 +697,10 @@ img {
 
 @media (max-width: 900px) {
   .site-header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
   }
 
   .main-nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
     justify-content: flex-start;
     overflow-x: auto;
     padding-bottom: 4px;
@@ -665,8 +725,13 @@ img {
 
   .service-grid,
   .value-grid,
-  .timeline {
+  .timeline,
+  .footer-contact-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cta-section .button {
+    justify-self: start;
   }
 }
 
@@ -678,12 +743,6 @@ img {
 
   .brand img {
     width: 104px;
-  }
-
-  .nav-cta {
-    min-height: 38px;
-    padding: 9px 12px;
-    font-size: 0.76rem;
   }
 
   .hero h1 {
