@@ -80,12 +80,15 @@ export const values = [
   }
 ];
 
+export const siteBasePath = "/cye-asesores.com-modernized";
+const asset = (path: string) => `${siteBasePath}/assets/${path}`;
+
 export const assets = {
-  logo: "/assets/logotipo-Photoroom.png",
-  hero: "/assets/2148968921.jpg",
-  services: "/assets/05-services-1024x804-1.jpg",
-  contact: "/assets/foto-de-cartel-1024x576.jpg",
-  office: "/assets/16005.jpg",
-  kitDigital: "/assets/CONBANDERA_KITDIGITAL.png",
-  favicon: "/assets/cropped-Captura-de-Pantalla-2024-11-21-a-las-22.08.35-192x192.png"
+  logo: asset("logotipo-Photoroom.png"),
+  hero: asset("2148968921.jpg"),
+  services: asset("05-services-1024x804-1.jpg"),
+  contact: asset("foto-de-cartel-1024x576.jpg"),
+  office: asset("16005.jpg"),
+  kitDigital: asset("CONBANDERA_KITDIGITAL.png"),
+  favicon: asset("cropped-Captura-de-Pantalla-2024-11-21-a-las-22.08.35-192x192.png")
 };

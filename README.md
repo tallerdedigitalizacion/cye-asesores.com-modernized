@@ -16,6 +16,9 @@ npm run dev
 
 La web estará disponible en `http://localhost:3000`.
 
+Al usar el mismo `basePath` que GitHub Pages, la ruta local principal es
+`http://localhost:3000/cye-asesores.com-modernized/`.
+
 ## Build estático
 
 ```bash
